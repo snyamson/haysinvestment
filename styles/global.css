@@ -14,3 +14,9 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.field-error {
+  color: #ff5252;
+  font-style: italic;
+  font-size: 0.75rem;
+}
