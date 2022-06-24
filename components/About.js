@@ -4,16 +4,16 @@ const About = () => {
       <div className="container">
         <div className="row d-flex">
           <div className="col-md-7 py-sm-3 py-md-5">
-            <div className="row py-5">
+            <div className="row py-5 px-3 pr-lg-5 pr-md-3">
               <h1
-                className="text-uppercase font-weight-bold"
+                className="text-uppercase font-weight-bold text-center text-lg-left"
                 style={{
                   color: '#8bc53f',
                 }}
               >
                 About hays investment
               </h1>
-              <p>
+              <p className="text-justify">
                 Lorem, ipsum dolor sit amet consectetur adipisicing elit.
                 Explicabo eveniet itaque dolores, reiciendis mollitia corrupti
                 ea enim officia, inventore neque, quo blanditiis quia nemo
@@ -23,46 +23,6 @@ const About = () => {
                 inventore neque, quo blanditiis quia nemo laudantium. Magnam
                 quasi quos tenetur ratione.
               </p>
-              {/* <div className="col-md-6 justify-content-center counter-wrap ftco-animate">
-                <div className="block-18">
-                  <div className="text">
-                    <strong className="number" data-number="800">
-                      0
-                    </strong>
-                    <span>Finished Projects</span>
-                  </div>
-                </div>
-              </div>
-              <div className="col-md-6 justify-content-center counter-wrap ftco-animate">
-                <div className="block-18">
-                  <div className="text">
-                    <strong className="number" data-number="795">
-                      0
-                    </strong>
-                    <span>happy Customers</span>
-                  </div>
-                </div>
-              </div>
-              <div className="col-md-6 justify-content-center counter-wrap ftco-animate">
-                <div className="block-18">
-                  <div className="text">
-                    <strong className="number" data-number="1200">
-                      0
-                    </strong>
-                    <span>Working Hours</span>
-                  </div>
-                </div>
-              </div>
-              <div className="col-md-6 justify-content-center counter-wrap ftco-animate">
-                <div className="block-18">
-                  <div className="text">
-                    <strong className="number" data-number="850">
-                      0
-                    </strong>
-                    <span>Cups of coffee</span>
-                  </div>
-                </div>
-              </div> */}
             </div>
           </div>
           <div
