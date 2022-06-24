@@ -13,7 +13,7 @@ const Modal = () => {
   useEffect(() => {
     if (document.body.classList.contains('modal-open')) {
       document.body.classList.remove('modal-open');
-    } else document.body.classList.add('modal-open');
+    } else document.body.classList.add(isModalOpen ? 'modal-open' : null);
   }, [isModalOpen]);
 
   // Submitting the form here!
