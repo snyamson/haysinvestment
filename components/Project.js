@@ -58,21 +58,21 @@ const Project = () => {
             {projectItems
               .filter(({ size }) => size === 'S')
               .map((item, index) => (
-                <ProjectItem key={index} item={item} />
+                <ProjectItem key={index} item={item} index={index} />
               ))}
           </div>
           <div className="col-md-8">
             {projectItems
               .filter(({ size }) => size === 'XL')
               .map((item, index) => (
-                <ProjectItem key={index} item={item} />
+                <ProjectItem key={index} item={item} index={index} />
               ))}
 
             <div className="row">
               {projectItems
                 .filter(({ size }) => size === 'M')
                 .map((item, index) => (
-                  <ProjectItem key={index} item={item} />
+                  <ProjectItem key={index} item={item} index={index} />
                 ))}
             </div>
           </div>

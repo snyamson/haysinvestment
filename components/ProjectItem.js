@@ -1,30 +1,26 @@
-import { useState } from 'react';
-import 'react-bnb-gallery/dist/index';
-import ReactBnbGallery from 'react-bnb-gallery';
-const photos = [
-  {
-    caption: 'caption 1',
-    subcaption: 'subcaption 1',
-    photo: '/images/image-1.jpg',
-  },
-  {
-    caption: 'caption 2',
-    subcaption: 'subcaption 2',
-    photo: '/images/image-2.jpg',
-  },
-  {
-    caption: 'caption 3',
-    subcaption: 'subcaption 3',
-    photo: '/images/image-3.jpg',
-  },
-];
+import { AppStore } from '../utils/store';
 
-function ProjectItem({ item }) {
-  const [isGalleryOpen, setIsGalleryOpen] = useState(false);
+function ProjectItem({ item, index }) {
+  const handleClick = (item, index) => {
+    AppStore.update((s) => {
+      (s.currentIndex = index),
+        (s.clickedImage = {
+          category: item.category,
+          url: item.imageUrl,
+          name: item.name,
+        });
+    });
+    //  setCurrentIndex(index);
+    //  setClickedImg(item.link);
+  };
+
   return (
     <>
-      <div className={item?.className ? item?.className : null}>
-        <a href="" className="portfolio ftco-animate">
+      <div
+        className={item?.className ? item?.className : null}
+        onClick={() => handleClick(item, index)}
+      >
+        <a className="portfolio ftco-animate">
           <div className="d-flex icon justify-content-center align-items-center">
             <span className="ion-md-search"></span>
           </div>
