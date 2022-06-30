@@ -1,6 +1,8 @@
 import Head from 'next/head';
 import { useEffect } from 'react';
+import { ToastContainer } from 'react-toastify';
 import Layout from '../components/shared/Layout';
+import { initilizeEmailService } from '../utils/emailService';
 
 // Root StyleSheet
 import '../public/css/open-iconic-bootstrap.min.css';
@@ -17,10 +19,14 @@ import '../public/css/icomoon.css';
 import '../public/css/style.css';
 import '../styles/nprogress.css';
 import '../styles/global.css';
+import 'react-toastify/dist/ReactToastify.css';
 //import('../public/js/owl.carousel.min.js');
 
 function MyApp({ Component, pageProps }) {
   useEffect(() => {
+    //Initialize EmailJS
+    initilizeEmailService();
+
     import('../public/js/jquery.min.js');
     //import('../public/js/jquery-migrate-3.0.1.min.js');
     import('../public/js/popper.min.js');
@@ -51,6 +57,7 @@ function MyApp({ Component, pageProps }) {
       </Head>
       <Layout>
         <Component {...pageProps} />
+        <ToastContainer />
       </Layout>
     </>
   );

@@ -32,7 +32,7 @@ const About = () => {
             }}
           >
             <p>
-              <a href="#" className="btn btn-white px-5 py-4">
+              <a href="/about" className="btn btn-white px-5 py-4">
                 Explore Further
               </a>
             </p>

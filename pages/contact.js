@@ -2,16 +2,18 @@ import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import { Formik, Form } from 'formik';
 import { contactUsValidationScheme } from '../utils/validationSchema';
-import { useState } from 'react';
+import { AppStore } from '../utils/store';
+import { sendEmail, isSubmitting } from '../utils/emailService';
 
 const Banner = dynamic(() => import('../components/shared/Banner'));
 const FormField = dynamic(() => import('../components/FormField'));
 
 const Contact = () => {
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const isFormSubmitting = AppStore.useState((s) => s.isFormSubmitting);
 
-  const onSubmit = (values) => {
-    alert(JSON.stringify(values, null, 2));
+  const onSubmit = ({ subject, fullName, message, email }, resetForm) => {
+    isSubmitting();
+    sendEmail(subject, fullName, message, email, resetForm);
   };
 
   return (
@@ -33,20 +35,26 @@ const Contact = () => {
             <div className="w-100"></div>
             <div className="col-md-3">
               <p>
-                <span>Address:</span> 198 West 21th Street, Suite 721 New York
+                <span>ADDRESS:</span> 198 West 21th Street, Suite 721 New York
                 NY 10016
               </p>
             </div>
             <div className="col-md-3">
               <p>
-                <span>Phone:</span>
+                <span>PHONE:</span>
                 <a href="tel://1234567920">+ 1235 2355 98</a>
               </p>
             </div>
             <div className="col-md-3">
               <p>
-                <span>Email:</span>
+                <span>EMAIL:</span>
                 <a href="mailto:info@yoursite.com">info@yoursite.com</a>
+              </p>
+            </div>
+            <div className="col-md-3">
+              <p>
+                <span>DIGITAL ADDRESS:</span>
+                <a>Digital addess of the Company</a>
               </p>
             </div>
           </div>
@@ -61,8 +69,7 @@ const Contact = () => {
                 }}
                 validationSchema={contactUsValidationScheme}
                 onSubmit={async (values, { resetForm }) => {
-                  await onSubmit(values);
-                  resetForm();
+                  await onSubmit(values, resetForm);
                 }}
               >
                 {() => (
@@ -94,7 +101,7 @@ const Contact = () => {
                         type="submit"
                         className="btn btn-primary py-3 px-5"
                       >
-                        {isSubmitting ? 'Sending' : 'Send Message'}
+                        {isFormSubmitting ? 'Sending' : 'Send Message'}
                       </button>
                     </div>
                   </Form>

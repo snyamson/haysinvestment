@@ -1,14 +1,16 @@
 import dynamic from 'next/dynamic';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Formik, Form } from 'formik';
 import Fade from 'react-reveal/Fade';
 import useModal from '../utils/useModal';
 import { requestQuoteValidationScheme } from '../utils/validationSchema';
+import { AppStore } from '../utils/store';
+import { isSubmitting, sendEmail } from '../utils/emailService';
 const FormField = dynamic(() => import('./FormField'));
 
 const Modal = () => {
   const [isModalOpen, toggleModal] = useModal();
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const isFormSubmitting = AppStore.useState((s) => s.isFormSubmitting);
 
   useEffect(() => {
     if (document.body.classList.contains('modal-open')) {
@@ -17,12 +19,9 @@ const Modal = () => {
   }, [isModalOpen]);
 
   // Submitting the form here!
-  const onSubmit = (values) => {
-    setIsSubmitting(true);
-    setTimeout(() => {
-      alert(JSON.stringify(values, null, 2));
-      setIsSubmitting(false);
-    }, 1000);
+  const onSubmit = ({ subject, fullName, message, email }, resetForm) => {
+    isSubmitting();
+    sendEmail(subject, fullName, message, email, resetForm, true, toggleModal);
   };
   return (
     <>
@@ -59,8 +58,7 @@ const Modal = () => {
                   initialValues={{ fullName: '', email: '', message: '' }}
                   validationSchema={requestQuoteValidationScheme}
                   onSubmit={async (values, { resetForm }) => {
-                    await onSubmit(values);
-                    resetForm();
+                    await onSubmit(values, resetForm);
                   }}
                 >
                   {() => (
@@ -80,7 +78,7 @@ const Modal = () => {
                       />
                       <div className="form-group">
                         <button type="submit" className="btn btn-primary">
-                          {isSubmitting ? 'Sending' : 'Send Message'}
+                          {isFormSubmitting ? 'Sending' : 'Send Message'}
                         </button>
                       </div>
                     </Form>
